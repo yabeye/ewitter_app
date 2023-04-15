@@ -1,5 +1,8 @@
 class KAssets {
   static const String _iconsPath = 'assets/icons';
+  static const String _imagesPath = 'assets/images';
+
+  // Icons!
   static const String ewitterLogo = '$_iconsPath/ewitter_logo.svg';
   static const String homeFilledIcon = '$_iconsPath/home_filled.svg';
   static const String homeOutlinedIcon = '$_iconsPath/home_outlined.svg';
@@ -17,4 +20,9 @@ class KAssets {
   static const String likeFilledIcon = '$_iconsPath/like_filled.svg';
   static const String viewsIcon = '$_iconsPath/views.svg';
   static const String verifiedIcon = '$_iconsPath/verified.svg';
+
+  // Images
+  static const String messageIcon = '$_imagesPath/message.png';
+  static const String hideIcon = '$_imagesPath/hide.png';
+  static const String showIcon = '$_imagesPath/show.png';
 }

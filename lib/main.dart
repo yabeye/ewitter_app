@@ -1,3 +1,4 @@
+import 'package:ewitter_app/src/features/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:ewitter_app/src/constants/constants.dart';
 import 'package:ewitter_app/src/features/auth/view/login_view.dart';
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: KApp.title,
       theme: AppTheme.theme,
-      home: const LoginView(),
+      // home: const LoginView(),
+      home: const SplashView(),
     );
   }
 }

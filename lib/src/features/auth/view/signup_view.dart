@@ -66,7 +66,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
       return;
     }
     if (!_doesUserAcceptTC) {
-      toasty(context, "Please accept terms and conditions");
+      toasty(context, KApp.pleaseAcceptTC);
       return;
     }
 

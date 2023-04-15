@@ -1,24 +1,29 @@
-import 'package:ewitter_app/src/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../../common/components/components.dart';
 import '../../../constants/constants.dart';
 import '../../../constants/ui_constants.dart';
 import '../../../theme/theme.dart';
+import '../controllers/auth_controller.dart';
 import 'signup_view.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  ConsumerState<LoginView> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _LoginViewState extends ConsumerState<LoginView> {
   late final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  late final TextEditingController _usernameOrEmailController;
+  late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
+
+  late final FocusNode _emailFocus;
+  late final FocusNode _passwordFocus;
 
   bool _isRemember = true;
 
@@ -26,18 +31,94 @@ class _LoginViewState extends State<LoginView> {
   void initState() {
     super.initState();
 
-    _usernameOrEmailController = TextEditingController();
+    _emailController = TextEditingController();
     _passwordController = TextEditingController();
+
+    _emailFocus = FocusNode();
+    _passwordFocus = FocusNode();
   }
 
   @override
   void dispose() {
-    _usernameOrEmailController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
+
+    _emailFocus.dispose();
+    _passwordFocus.dispose();
     super.dispose();
   }
 
+  void _onLogIn() {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    ref.read(authControllerProvider.notifier).logIn(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isLoading = ref.watch(authControllerProvider);
+    return Scaffold(
+      appBar: appBar(
+        titleWidget: LogoLoader(isLoading: isLoading),
+      ),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              60.height,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Log In",
+                  style: boldTextStyle(
+                    size: heading2Size,
+                    color: KPallet.whiteColor,
+                  ),
+                ),
+              ),
+              40.height,
+              customTextField(
+                context,
+                controller: _emailController,
+                focus: _emailFocus,
+                nextFocusNode: _passwordFocus,
+                textFieldType: TextFieldType.EMAIL,
+                errorFieldRequired: "email is required",
+                labelText: "Email",
+                autoFillHints: const [AutofillHints.email],
+                onFieldSubmitted: (s) {},
+              ),
+              20.height,
+              customTextField(
+                context,
+                controller: _passwordController,
+                focus: _passwordFocus,
+                textFieldType: TextFieldType.PASSWORD,
+                errorFieldRequired: "password is required",
+                labelText: "Password",
+                autoFillHints: const [AutofillHints.password],
+                onFieldSubmitted: (s) {},
+                isPassword: true,
+              ),
+              20.height,
+              _buildRememberWidget(),
+            ],
+          ),
+        ).paddingSymmetric(horizontal: 32),
+      ),
+    );
+  }
+
   Widget _buildRememberWidget() {
+    final isLoading = ref.watch(authControllerProvider);
+
     return Column(
       children: [
         Align(
@@ -61,7 +142,7 @@ class _LoginViewState extends State<LoginView> {
           color: KPallet.primaryColor,
           textStyle: boldTextStyle(color: white),
           width: context.width() - context.navigationBarHeight,
-          onTap: () {},
+          onTap: isLoading ? null : _onLogIn,
         ),
         60.height,
         TextButton(
@@ -95,61 +176,6 @@ class _LoginViewState extends State<LoginView> {
           ],
         ),
       ],
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar(),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              60.height,
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Log In",
-                  style: boldTextStyle(
-                    size: heading2Size,
-                    color: KPallet.whiteColor,
-                  ),
-                ),
-              ),
-              40.height,
-              AppTextField(
-                textFieldType: TextFieldType.EMAIL,
-                controller: _usernameOrEmailController,
-                errorThisFieldRequired: "email is required",
-                textStyle: const TextStyle(color: KPallet.whiteColor),
-                decoration: inputDecoration(context, labelText: "Email"),
-                suffix: KAssets.messageIcon.iconImage(size: 10).paddingAll(14),
-                autoFillHints: const [AutofillHints.email],
-                onFieldSubmitted: (s) {},
-              ),
-              20.height,
-              AppTextField(
-                textFieldType: TextFieldType.PASSWORD,
-                controller: _passwordController,
-                errorThisFieldRequired: "password is required",
-                textStyle: const TextStyle(color: KPallet.whiteColor),
-                suffixPasswordVisibleWidget:
-                    KAssets.showIcon.iconImage(size: 10).paddingAll(14),
-                suffixPasswordInvisibleWidget:
-                    KAssets.hideIcon.iconImage(size: 10).paddingAll(14),
-                decoration: inputDecoration(context, labelText: "Password"),
-                autoFillHints: const [AutofillHints.password],
-                onFieldSubmitted: (s) {},
-              ),
-              20.height,
-              _buildRememberWidget(),
-            ],
-          ),
-        ).paddingSymmetric(horizontal: 32),
-      ),
     );
   }
 }

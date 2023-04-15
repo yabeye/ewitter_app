@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ewitter_app/src/features/splash/splash_view.dart';
-import 'package:ewitter_app/src/constants/constants.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'src/constants/constants.dart';
 import 'src/theme/theme.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  await dotenv.load();
+
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

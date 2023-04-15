@@ -1,30 +1,32 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:ewitter_app/src/features/auth/controllers/auth_controller.dart';
 
 import '../../../common/components/components.dart';
 import '../../../constants/constants.dart';
-import '../../../constants/ui_constants.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/utils.dart';
 
-class SignUpView extends StatefulWidget {
+class SignUpView extends ConsumerStatefulWidget {
   const SignUpView({super.key});
 
   @override
-  State<SignUpView> createState() => _SignUpViewState();
+  ConsumerState<SignUpView> createState() => _SignUpViewState();
 }
 
-class _SignUpViewState extends State<SignUpView> {
+class _SignUpViewState extends ConsumerState<SignUpView> {
   late final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  late final TextEditingController _usernameOrEmailController;
+  late final TextEditingController _usernameController;
+  late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
   late final TextEditingController _confirmPasswordController;
 
-  late final FocusNode _usernameOrEmailFocus;
+  late final FocusNode _usernameFocus;
+  late final FocusNode _emailFocus;
   late final FocusNode _passwordFocus;
   late final FocusNode _confirmPasswordFocus;
 
@@ -34,41 +36,51 @@ class _SignUpViewState extends State<SignUpView> {
   void initState() {
     super.initState();
 
-    _usernameOrEmailController = TextEditingController();
+    _usernameController = TextEditingController();
+    _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _confirmPasswordController = TextEditingController();
 
-    _usernameOrEmailFocus = FocusNode();
+    _usernameFocus = FocusNode();
+    _emailFocus = FocusNode();
     _passwordFocus = FocusNode();
     _confirmPasswordFocus = FocusNode();
   }
 
   @override
   void dispose() {
-    _usernameOrEmailController.dispose();
+    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
 
-    _usernameOrEmailFocus.dispose();
+    _usernameFocus.dispose();
+    _emailFocus.dispose();
     _passwordFocus.dispose();
     _confirmPasswordFocus.dispose();
     super.dispose();
   }
 
-  void _signUp() async {
+  void _onSignUp() {
     if (!_formKey.currentState!.validate()) {
       return;
     }
-    if (_doesUserAcceptTC) {
+    if (!_doesUserAcceptTC) {
       toasty(context, "Please accept terms and conditions");
       return;
     }
 
-    //TODO: Continue implementing sign up logic!
+    ref.read(authControllerProvider.notifier).signUp(
+          email: _emailController.text,
+          password: _passwordController.text,
+          name: _usernameController.text,
+        );
   }
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(authControllerProvider);
+
     return Scaffold(
       appBar: appBar(
         titleWidget: const Padding(
@@ -86,15 +98,11 @@ class _SignUpViewState extends State<SignUpView> {
               20.height,
               Row(
                 children: [
-                  SvgPicture.asset(
-                    KAssets.ewitterLogo,
-                    width: 30,
-                    height: 30,
-                  ).paddingRight(12),
+                  LogoLoader(isLoading: isLoading).paddingRight(12),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Creating a new account",
+                      "${isLoading ? "Creating" : "Create"} a new account",
                       style: boldTextStyle(
                         size: heading2Size,
                         color: KPallet.whiteColor,
@@ -103,7 +111,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                 ],
               ),
-              40.height,
+              20.height,
               _buildSignUpForm(context),
               20.height,
               _buildTCWidget(),
@@ -121,8 +129,21 @@ class _SignUpViewState extends State<SignUpView> {
       children: [
         customTextField(
           context,
-          controller: _usernameOrEmailController,
-          focus: _usernameOrEmailFocus,
+          autoFocus: true,
+          controller: _usernameController,
+          focus: _usernameFocus,
+          nextFocusNode: _emailFocus,
+          textFieldType: TextFieldType.NAME,
+          errorFieldRequired: "Username is required",
+          labelText: "Username",
+          autoFillHints: const [AutofillHints.username],
+          onFieldSubmitted: (s) {},
+        ),
+        20.height,
+        customTextField(
+          context,
+          controller: _emailController,
+          focus: _emailFocus,
           nextFocusNode: _passwordFocus,
           textFieldType: TextFieldType.EMAIL,
           errorFieldRequired: "email is required",
@@ -213,6 +234,7 @@ class _SignUpViewState extends State<SignUpView> {
   }
 
   Widget _buildRememberWidget() {
+    final isLoading = ref.watch(authControllerProvider);
     return Column(
       children: [
         AppButton(
@@ -220,9 +242,9 @@ class _SignUpViewState extends State<SignUpView> {
           color: KPallet.primaryColor,
           textStyle: boldTextStyle(color: white),
           width: context.width() - context.navigationBarHeight,
-          onTap: _signUp,
+          onTap: isLoading ? null : _onSignUp,
         ),
-        40.height,
+        20.height,
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -4,6 +4,7 @@ class KApp {
   static const String description = "Ewitter App";
 
   // Error Messages
+  static const String timeOutError = "We couldn't connect you at the moment";
   static const String unExpectedError = "Unexpected error occurred";
 
   static const String version = "0.0.1";

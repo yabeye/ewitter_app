@@ -44,6 +44,7 @@ AppBar appBar({
 
 Widget customTextField(
   BuildContext context, {
+  bool autoFocus = false,
   String? labelText,
   TextEditingController? controller,
   FocusNode? focus,
@@ -58,6 +59,7 @@ Widget customTextField(
   return AppTextField(
     controller: controller,
     focus: focus,
+    autoFocus: autoFocus,
     nextFocus: nextFocusNode,
     textFieldType: textFieldType ?? TextFieldType.NAME,
     errorThisFieldRequired:

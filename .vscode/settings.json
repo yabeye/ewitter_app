@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["appwrite", "Ewitter", "signup"]
+  "cSpell.words": ["appwrite", "dotenv", "Ewitter", "signup"],
+  "dotenv.enableAutocloaking": false
 }

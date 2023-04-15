@@ -31,7 +31,7 @@ AppBar appBar({
           )
         : (titleWidget ??
             SvgPicture.asset(
-              KAssets.ewitterLogo,
+              KAssets.ewitterLogoTransparent,
               width: 50,
               height: 50,
             )),

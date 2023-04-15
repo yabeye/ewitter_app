@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: KApp.title,
       theme: AppTheme.theme,
+      darkTheme: AppTheme.theme,
       home: const SplashView(),
     );
   }

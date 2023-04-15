@@ -13,6 +13,8 @@ class KApp {
   static const String keyAppWriteEndPoint = "APP_WRITE_END_POINT";
   static const String keyAppWriteProjectId = "APP_WRITE_PROJECT_ID";
   static const String keyAppWriteDatabaseId = "APP_WRITE_DATABASE_ID";
+  static const String keyAppWriteUsersCollectionId =
+      "APP_WRITE_USERS_COLLECTION_ID";
 
   // App Version
   static const String version = "0.1.0";

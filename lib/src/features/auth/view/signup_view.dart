@@ -71,9 +71,10 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
     }
 
     ref.read(authControllerProvider.notifier).signUp(
+          context,
           email: _emailController.text,
           password: _passwordController.text,
-          name: _usernameController.text,
+          username: _usernameController.text,
         );
   }
 

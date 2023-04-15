@@ -8,6 +8,7 @@ class KAppWrite {
       KApp.keyAppWriteEndPoint,
       KApp.keyAppWriteProjectId,
       KApp.keyAppWriteDatabaseId,
+      KApp.keyAppWriteUsersCollectionId,
     ];
 
     for (int i = 0; i < envKeys.length; i++) {
@@ -22,4 +23,6 @@ class KAppWrite {
   static String baseEndPointUrl = dotenv.env[KApp.keyAppWriteEndPoint]!;
   static String projectId = dotenv.env[KApp.keyAppWriteProjectId]!;
   static String databaseId = dotenv.env[KApp.keyAppWriteDatabaseId]!;
+  static String usersCollectionId =
+      dotenv.env[KApp.keyAppWriteUsersCollectionId]!;
 }

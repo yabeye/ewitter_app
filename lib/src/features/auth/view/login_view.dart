@@ -54,6 +54,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
     }
 
     ref.read(authControllerProvider.notifier).logIn(
+          context,
           email: _emailController.text,
           password: _passwordController.text,
         );

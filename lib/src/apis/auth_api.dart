@@ -16,12 +16,15 @@ abstract class IAuthAPI {
   FutureEither<User> signUp({
     required String email,
     required String password,
-    required String name,
+    required String username,
   });
+
   FutureEither<Session> logIn({
     required String email,
     required String password,
   });
+
+  Future<User?> getCurrentUserAccount();
 
   FutureEitherVoid logout();
 }
@@ -32,10 +35,23 @@ class AuthAPI implements IAuthAPI {
   AuthAPI({required account}) : _account = account;
 
   @override
+  Future<User?> getCurrentUserAccount() async {
+    try {
+      return await _account.get();
+    } on AppwriteException catch (e, st) {
+      return null;
+    } on TimeoutException catch (e, st) {
+      return null;
+    } catch (e, st) {
+      return null;
+    }
+  }
+
+  @override
   FutureEither<User> signUp({
     required String email,
     required String password,
-    required String name,
+    required String username,
   }) async {
     try {
       final newAccount = await _account
@@ -43,7 +59,7 @@ class AuthAPI implements IAuthAPI {
             userId: ID.unique(),
             email: email,
             password: password,
-            name: name,
+            name: username,
           )
           .timeout(KApi.apiCallTimeout);
       return right(newAccount);

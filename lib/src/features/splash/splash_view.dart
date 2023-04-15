@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:ewitter_app/src/theme/pallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -39,11 +40,16 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SvgPicture.asset(
-          KAssets.ewitterLogo,
-          width: 50,
-          height: 50,
+      body: Container(
+        width: context.width(),
+        height: context.height(),
+        color: KPallet.primaryColor,
+        child: Center(
+          child: SvgPicture.asset(
+            KAssets.ewitterLogo,
+            width: 150,
+            height: 150,
+          ),
         ),
       ),
     );

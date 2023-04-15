@@ -39,6 +39,9 @@ dependencies:
   optimized_cached_image: ^3.0.1
   nb_utils: ^5.0.8
   google_fonts: ^4.0.3
+  url_launcher: ^6.1.10
+  flutter_riverpod: ^2.3.4
+  fpdart: ^0.5.0
 
 dev_dependencies:
   flutter_test:

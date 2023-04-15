@@ -1,9 +1,11 @@
-import 'package:ewitter_app/src/constants/constants.dart';
-import 'package:ewitter_app/src/constants/ui_constants.dart';
-import 'package:ewitter_app/src/theme/theme.dart';
-import 'package:ewitter_app/src/utils/extensions.dart';
+import 'package:ewitter_app/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import '../../../constants/constants.dart';
+import '../../../constants/ui_constants.dart';
+import '../../../theme/theme.dart';
+import 'signup_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -79,6 +81,7 @@ class _LoginViewState extends State<LoginView> {
             TextButton(
               onPressed: () {
                 hideKeyboard(context);
+                const SignUpView().launch(context, isNewTask: false);
               },
               child: Text(
                 "SignUp",
@@ -105,7 +108,7 @@ class _LoginViewState extends State<LoginView> {
           key: _formKey,
           child: Column(
             children: [
-              20.height,
+              60.height,
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -121,6 +124,7 @@ class _LoginViewState extends State<LoginView> {
                 textFieldType: TextFieldType.EMAIL,
                 controller: _usernameOrEmailController,
                 errorThisFieldRequired: "email is required",
+                textStyle: const TextStyle(color: KPallet.whiteColor),
                 decoration: inputDecoration(context, labelText: "Email"),
                 suffix: KAssets.messageIcon.iconImage(size: 10).paddingAll(14),
                 autoFillHints: const [AutofillHints.email],
@@ -130,6 +134,8 @@ class _LoginViewState extends State<LoginView> {
               AppTextField(
                 textFieldType: TextFieldType.PASSWORD,
                 controller: _passwordController,
+                errorThisFieldRequired: "password is required",
+                textStyle: const TextStyle(color: KPallet.whiteColor),
                 suffixPasswordVisibleWidget:
                     KAssets.showIcon.iconImage(size: 10).paddingAll(14),
                 suffixPasswordInvisibleWidget:
@@ -142,7 +148,7 @@ class _LoginViewState extends State<LoginView> {
               _buildRememberWidget(),
             ],
           ),
-        ).paddingAll(32),
+        ).paddingSymmetric(horizontal: 32),
       ),
     );
   }

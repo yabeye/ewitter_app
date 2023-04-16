@@ -28,6 +28,7 @@ class KAssets {
   static const String microphoneIcon = '$_iconsPath/microphone.svg';
   static const String microphoneFilledIcon =
       '$_iconsPath/microphone_filled.svg';
+  static const String newPostIcon = '$_iconsPath/new_post.svg';
 
   // Images
   static const String messageIcon = '$_imagesPath/message.png';

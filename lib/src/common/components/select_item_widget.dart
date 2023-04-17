@@ -1,6 +1,6 @@
-import 'package:ewitter_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:ewitter_app/src/theme/theme.dart';
 
 // ignore: must_be_immutable
 class SelectedItemWidget extends StatelessWidget {
@@ -22,8 +22,8 @@ class SelectedItemWidget extends StatelessWidget {
       width: 18,
       decoration: decoration ??
           boxDecorationDefault(
-            color: isSelected ? KPallet.primaryColor : context.cardColor,
-            border: Border.all(color: KPallet.primaryColor),
+            color: isSelected ? KPalette.primaryColor : context.cardColor,
+            border: Border.all(color: KPalette.primaryColor),
             shape: BoxShape.circle,
           ),
       child: isSelected

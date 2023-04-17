@@ -38,11 +38,11 @@ class AuthAPI implements IAuthAPI {
   Future<User?> getCurrentUserAccount() async {
     try {
       return await _account.get();
-    } on AppwriteException catch (e, st) {
+    } on AppwriteException catch (e, _) {
       return null;
-    } on TimeoutException catch (e, st) {
+    } on TimeoutException catch (e, _) {
       return null;
-    } catch (e, st) {
+    } catch (e, _) {
       return null;
     }
   }

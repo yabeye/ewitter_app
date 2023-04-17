@@ -18,13 +18,14 @@ class KAssets {
   static const String emojiIcon = '$_iconsPath/emoji.svg';
   static const String galleryIcon = '$_iconsPath/gallery.svg';
   static const String commentIcon = '$_iconsPath/comment.svg';
-  static const String retweetIcon = '$_iconsPath/retweet.svg';
+  static const String reEweetIcon = '$_iconsPath/reeweet.svg';
   static const String likeOutlinedIcon = '$_iconsPath/like_outlined.svg';
   static const String likeFilledIcon = '$_iconsPath/like_filled.svg';
   static const String viewsIcon = '$_iconsPath/views.svg';
   static const String verifiedIcon = '$_iconsPath/verified.svg';
   static const String emailIcon = '$_iconsPath/email.svg';
   static const String emailFilledIcon = '$_iconsPath/email_filled.svg';
+  static const String noUserIcon = '$_iconsPath/no_user.svg';
   static const String microphoneIcon = '$_iconsPath/microphone.svg';
   static const String microphoneFilledIcon =
       '$_iconsPath/microphone_filled.svg';

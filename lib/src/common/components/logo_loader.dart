@@ -19,7 +19,7 @@ class LogoLoader extends StatelessWidget {
       height: 40,
       width: 40,
       decoration: BoxDecoration(
-        color: KPallet.primaryColor,
+        color: KPalette.primaryColor,
         borderRadius: radius(100),
       ),
       child: Stack(
@@ -30,7 +30,7 @@ class LogoLoader extends StatelessWidget {
             child: !isLoading
                 ? null
                 : const CircularProgressIndicator(
-                    color: KPallet.primaryColor,
+                    color: KPalette.primaryColor,
                     strokeWidth: 8,
                   ),
           )

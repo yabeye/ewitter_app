@@ -76,16 +76,25 @@ class UserModel {
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
+    print("Map ${map['isVerified'].runtimeType}");
+    map.entries.forEach(
+      (element) => "${element}  --- ${element.runtimeType}",
+    );
+
     return UserModel(
       uid: map['\$id'] ?? '',
       email: map['email'] ?? '',
       username: map['username'] ?? '',
-      followers: map['followers'] ? List<String>.from(map['followers']) : [],
-      following: map['following'] ? List<String>.from(map['following']) : [],
+      followers: const <String>[],
+      following: const <String>[],
+      // followers:
+      //     map['followers'] ? List<String>.from(map['followers']) : <String>[],
+      // following:
+      //     map['following'] ? List<String>.from(map['following']) : <String>[],
       profilePic: map['profilePic'],
       coverPic: map['coverPic'],
       bio: map['bio'],
-      isVerified: map['isVerified'] ?? false,
+      isVerified: map['isVerified'],
     );
   }
 

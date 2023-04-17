@@ -30,9 +30,8 @@ class _SplashViewState extends ConsumerState<SplashView> {
     afterBuildCreated(() async {
       // TODO: Set some fields to the  localstorage like thememode and language!
 
-      final User? currentUser = await ref
-          .watch(authControllerProvider.notifier)
-          .getCurrentUserAccount();
+      final User? currentUser =
+          await ref.watch(authControllerProvider.notifier).currentUserAccount();
 
       await 3000.milliseconds.delay;
       if (!mounted) return;
@@ -64,12 +63,12 @@ class _SplashViewState extends ConsumerState<SplashView> {
       body: Container(
         width: context.width(),
         height: context.height(),
-        color: KPallet.primaryColor,
+        color: KPalette.primaryColor,
         child: Center(
           child: SvgPicture.asset(
             KAssets.ewitterLogo,
-            width: 150,
-            height: 150,
+            width: context.width() * .3,
+            height: context.width() * .3,
           ),
         ),
       ),

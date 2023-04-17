@@ -1,8 +1,8 @@
-import 'package:ewitter_app/src/common/components/back_widget.dart';
-import 'package:ewitter_app/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:ewitter_app/src/common/components/back_widget.dart';
+import 'package:ewitter_app/src/common/utils/utils.dart';
 
 import 'package:ewitter_app/src/theme/theme.dart';
 import 'asset_constants.dart';
@@ -22,11 +22,11 @@ AppBar appBar({
             width: 50,
             height: 50,
             decoration: BoxDecoration(
-              color: KPallet.primaryColor,
+              color: KPalette.primaryColor,
               borderRadius: radius(100),
             ),
             child: const CircularProgressIndicator(
-              color: KPallet.whiteColor,
+              color: KPalette.whiteColor,
             ),
           )
         : (titleWidget ??
@@ -35,7 +35,7 @@ AppBar appBar({
               width: 50,
               height: 50,
             )),
-    color: KPallet.backgroundColor,
+    color: KPalette.backgroundColor,
     showBack: showBack,
     center: true,
     backWidget: backWidget ?? const BackWidget(),
@@ -64,7 +64,7 @@ Widget customTextField(
     textFieldType: textFieldType ?? TextFieldType.NAME,
     errorThisFieldRequired:
         errorFieldRequired ?? "${labelText ?? "This field"} is required",
-    textStyle: const TextStyle(color: KPallet.whiteColor),
+    textStyle: const TextStyle(color: KPalette.whiteColor),
     isPassword: isPassword,
     suffixPasswordVisibleWidget: !isPassword
         ? null

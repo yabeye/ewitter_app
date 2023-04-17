@@ -1,3 +1,4 @@
+import 'package:ewitter_app/src/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 extension strEtx on String {
@@ -8,9 +9,13 @@ extension strEtx on String {
       width: size ?? 24,
       fit: fit ?? BoxFit.cover,
       color: Colors.white,
-      // errorBuilder: (context, error, stackTrace) {
-      //   return Image.asset(ic_no_photo, height: size ?? 24, width: size ?? 24);
-      // },
+      errorBuilder: (context, error, stackTrace) {
+        return Image.asset(
+          KAssets.hideIcon,
+          height: size ?? 24,
+          width: size ?? 24,
+        );
+      },
     );
   }
 }

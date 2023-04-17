@@ -5,7 +5,7 @@ class KApp {
   static const String name = "Ewitter";
 
   // Error Messages
-  static const String pleaseAcceptTC = "We couldn't connect you at the moment";
+  static const String pleaseAcceptTC = "Please accept terms of service";
   static const String timeOutError = "We couldn't connect you at the moment";
   static const String unExpectedError = "Unexpected error occurred";
 
@@ -15,6 +15,9 @@ class KApp {
   static const String keyAppWriteDatabaseId = "APP_WRITE_DATABASE_ID";
   static const String keyAppWriteUsersCollectionId =
       "APP_WRITE_USERS_COLLECTION_ID";
+  static const String keyAppWriteEweetCollectionId =
+      "APP_WRITE_EWEETS_COLLECTION_ID";
+  static const String keyAppWriteImageBucket = "APP_WRITE_IMAGE_BUCKET";
 
   // App Version
   static const String version = "0.1.0";

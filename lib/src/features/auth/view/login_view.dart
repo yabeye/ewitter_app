@@ -80,7 +80,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                   "Log In",
                   style: boldTextStyle(
                     size: heading2Size,
-                    color: KPallet.whiteColor,
+                    color: KPalette.whiteColor,
                   ),
                 ),
               ),
@@ -140,7 +140,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
         24.height,
         AppButton(
           text: "Log In",
-          color: KPallet.primaryColor,
+          color: KPalette.primaryColor,
           textStyle: boldTextStyle(color: white),
           width: context.width() - context.navigationBarHeight,
           onTap: isLoading ? null : _onLogIn,
@@ -151,7 +151,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
           child: Text(
             "Forgot Password?",
             style: boldTextStyle(
-              color: KPallet.primaryColor,
+              color: KPalette.primaryColor,
               fontStyle: FontStyle.italic,
             ),
           ),
@@ -168,7 +168,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
               child: Text(
                 "SignUp",
                 style: boldTextStyle(
-                  color: KPallet.primaryColor,
+                  color: KPalette.primaryColor,
                   decoration: TextDecoration.underline,
                   fontStyle: FontStyle.italic,
                 ),

@@ -15,33 +15,33 @@ const int body3Size = 12;
 
 class AppTheme {
   static ThemeData theme = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: KPallet.backgroundColor,
+    scaffoldBackgroundColor: KPalette.backgroundColor,
     appBarTheme: const AppBarTheme(
-      backgroundColor: KPallet.backgroundColor,
+      backgroundColor: KPalette.backgroundColor,
       elevation: 0,
     ),
-    primaryColor: KPallet.primaryColor,
+    primaryColor: KPalette.primaryColor,
     colorScheme: const ColorScheme.dark()
         .copyWith(
-          primary: KPallet.primaryColor,
-          secondary: KPallet.secondaryColor,
+          primary: KPalette.primaryColor,
+          secondary: KPalette.secondaryColor,
         )
-        .copyWith(secondary: KPallet.primaryColor),
+        .copyWith(secondary: KPalette.primaryColor),
     textTheme: GoogleFonts.montserratTextTheme(
       const TextTheme(
-        displaySmall: TextStyle(color: KPallet.primaryColor),
-        headlineMedium: TextStyle(color: KPallet.primaryColor),
-        headlineSmall: TextStyle(color: KPallet.primaryColor),
-        titleLarge: TextStyle(color: KPallet.primaryColor),
-        bodyLarge: TextStyle(color: KPallet.whiteColor),
-        bodyMedium: TextStyle(color: KPallet.whiteColor),
-        titleMedium: TextStyle(color: KPallet.whiteColor),
-        titleSmall: TextStyle(color: KPallet.whiteColor),
-        bodySmall: TextStyle(color: KPallet.whiteColor),
+        displaySmall: TextStyle(color: KPalette.primaryColor),
+        headlineMedium: TextStyle(color: KPalette.primaryColor),
+        headlineSmall: TextStyle(color: KPalette.primaryColor),
+        titleLarge: TextStyle(color: KPalette.primaryColor),
+        bodyLarge: TextStyle(color: KPalette.whiteColor),
+        bodyMedium: TextStyle(color: KPalette.whiteColor),
+        titleMedium: TextStyle(color: KPalette.whiteColor),
+        titleSmall: TextStyle(color: KPalette.whiteColor),
+        bodySmall: TextStyle(color: KPalette.whiteColor),
       ),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: KPallet.primaryColor,
+      backgroundColor: KPalette.primaryColor,
     ),
   );
 }
@@ -58,6 +58,6 @@ InputDecoration inputDecoration(BuildContext context,
     errorMaxLines: 2,
     errorStyle: primaryTextStyle(color: Colors.red, size: 12),
     filled: true,
-    fillColor: KPallet.backgroundColor,
+    fillColor: KPalette.backgroundColor,
   );
 }

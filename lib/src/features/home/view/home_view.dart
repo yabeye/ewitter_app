@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:ewitter_app/src/theme/pallet.dart';
 
 import '../../../constants/constants.dart';
+import '../../eweet/eweet_list.dart';
+import '../../eweet/view/new_eweet.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -17,8 +19,6 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   int _page = 0;
   late final ValueNotifier<bool> _isDialOpen;
-
-  bool visible = true;
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   _onCreatePost() {
-    toasty(context, "Navigate to CreateNewEweet Screen!");
+    const NewEweet().launch(context);
   }
 
   @override
@@ -55,11 +55,7 @@ class _HomeViewState extends State<HomeView> {
   Widget _getBody() {
     switch (_page) {
       case 0:
-        return Center(
-            child: Text(
-          "Home Screen!",
-          style: boldTextStyle(size: 22, color: Colors.white),
-        ));
+        return const EweetList();
       case 1:
         return Center(
             child: Text(
@@ -109,11 +105,11 @@ class _HomeViewState extends State<HomeView> {
       labelTransitionBuilder: (widget, animation) =>
           ScaleTransition(scale: animation, child: widget),
       // childrenButtonSize: const Size(40.0, 70.0),
-      visible: visible,
-      overlayColor: KPallet.backgroundColor,
+      visible: true,
+      overlayColor: KPalette.backgroundColor,
       overlayOpacity: 0.8,
-      onOpen: () => debugPrint('OPENING New POST'),
-      onClose: () => debugPrint('CLOSING New POST'),
+      onOpen: () => debugPrint('Open new post'),
+      onClose: () => debugPrint('Close new post'),
       useRotationAnimation: true,
       elevation: 8.0,
       animationCurve: Curves.elasticInOut,
@@ -123,10 +119,10 @@ class _HomeViewState extends State<HomeView> {
         SpeedDialChild(
           child: SvgPicture.asset(
             KAssets.newPostIcon,
-            color: KPallet.primaryColor,
+            color: KPalette.primaryColor,
           ),
           backgroundColor: Colors.white,
-          foregroundColor: KPallet.primaryColor,
+          foregroundColor: KPalette.primaryColor,
           label: 'Eweet',
           labelStyle: const TextStyle(backgroundColor: Colors.transparent),
           visible: true,
@@ -135,10 +131,10 @@ class _HomeViewState extends State<HomeView> {
         SpeedDialChild(
           child: SvgPicture.asset(
             KAssets.gifIcon,
-            color: KPallet.primaryColor,
+            color: KPalette.primaryColor,
           ),
           backgroundColor: Colors.white,
-          foregroundColor: KPallet.primaryColor,
+          foregroundColor: KPalette.primaryColor,
           label: 'Gif',
           labelStyle: const TextStyle(backgroundColor: Colors.transparent),
           visible: true,
@@ -149,10 +145,10 @@ class _HomeViewState extends State<HomeView> {
         SpeedDialChild(
           child: SvgPicture.asset(
             KAssets.galleryIcon,
-            color: KPallet.primaryColor,
+            color: KPalette.primaryColor,
           ),
-          backgroundColor: KPallet.whiteColor,
-          foregroundColor: KPallet.primaryColor,
+          backgroundColor: KPalette.whiteColor,
+          foregroundColor: KPalette.primaryColor,
           label: 'Photos',
           onTap: () {
             toasty(context, "Posting a new photo ...");
@@ -161,59 +157,71 @@ class _HomeViewState extends State<HomeView> {
         SpeedDialChild(
           child: SvgPicture.asset(
             KAssets.microphoneIcon,
-            color: KPallet.primaryColor,
+            color: KPalette.primaryColor,
           ),
-          backgroundColor: KPallet.whiteColor,
-          foregroundColor: KPallet.primaryColor,
+          backgroundColor: KPalette.whiteColor,
+          foregroundColor: KPalette.primaryColor,
           label: 'Spaces',
           onTap: () {
             toasty(context, "Going to space ...");
           },
         ),
       ],
-      child: const Icon(Icons.add, color: KPallet.whiteColor),
+      child: const Icon(Icons.add, color: KPalette.whiteColor),
     );
   }
 
-  CupertinoTabBar _buildBottomNavigationBar() {
-    return CupertinoTabBar(
-      currentIndex: _page,
-      onTap: _onPageChange,
-      backgroundColor: KPallet.backgroundColor,
-      items: [
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(
-            _page == 0 ? KAssets.homeFilledIcon : KAssets.homeOutlinedIcon,
-            color: KPallet.whiteColor,
+  Widget _buildBottomNavigationBar() {
+    return Container(
+      decoration: const BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: KPalette.greyColor,
+            width: 0.3,
           ),
         ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(
-            _page == 1 ? KAssets.searchIconFilled : KAssets.searchIcon,
-            color: KPallet.whiteColor,
+      ),
+      child: CupertinoTabBar(
+        currentIndex: _page,
+        onTap: _onPageChange,
+        backgroundColor: KPalette.backgroundColor,
+        items: [
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              _page == 0 ? KAssets.homeFilledIcon : KAssets.homeOutlinedIcon,
+              color: KPalette.whiteColor,
+            ),
           ),
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(
-            _page == 2 ? KAssets.microphoneFilledIcon : KAssets.microphoneIcon,
-            color: KPallet.whiteColor,
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              _page == 1 ? KAssets.searchIconFilled : KAssets.searchIcon,
+              color: KPalette.whiteColor,
+            ),
           ),
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(
-            _page == 3
-                ? KAssets.notificationFilledIcon
-                : KAssets.notificationOutlinedIcon,
-            color: KPallet.whiteColor,
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              _page == 2
+                  ? KAssets.microphoneFilledIcon
+                  : KAssets.microphoneIcon,
+              color: KPalette.whiteColor,
+            ),
           ),
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(
-            _page == 4 ? KAssets.emailFilledIcon : KAssets.emailIcon,
-            color: KPallet.whiteColor,
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              _page == 3
+                  ? KAssets.notificationFilledIcon
+                  : KAssets.notificationOutlinedIcon,
+              color: KPalette.whiteColor,
+            ),
           ),
-        ),
-      ],
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              _page == 4 ? KAssets.emailFilledIcon : KAssets.emailIcon,
+              color: KPalette.whiteColor,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

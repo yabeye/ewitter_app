@@ -30,6 +30,7 @@ class EweetCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     UserModel? currentUser;
     try {
+      debugPrint("Current tweet count is ${eweet.shareCount}");
       currentUser = ref.watch(currentUserDetailsProvider).value;
     } catch (_) {}
 
@@ -95,7 +96,7 @@ class EweetCard extends ConsumerWidget {
                                       ),
                                       const SizedBox(width: 2),
                                       Text(
-                                        '${eweet.rePostedBy} re posted',
+                                        '${eweet.rePostedBy} re eweeted',
                                         style: const TextStyle(
                                           color: KPalette.greyColor,
                                           fontSize: 16,

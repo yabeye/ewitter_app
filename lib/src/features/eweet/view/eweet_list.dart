@@ -17,7 +17,7 @@ class EweetList extends ConsumerStatefulWidget {
 }
 
 class _EweetListState extends ConsumerState<EweetList> {
-  final List<Eweet> _eweets = [];
+  List<Eweet> _eweets = [];
 
   void _realtimeEweetUpdate(RealtimeMessage realtimeEweets) {
     final String eventFrom =
@@ -32,13 +32,13 @@ class _EweetListState extends ConsumerState<EweetList> {
       int updatedEweetIndex = _eweets.indexWhere((e) => e.id == eweetId);
       _eweets[updatedEweetIndex] = Eweet.fromMap(realtimeEweets.payload);
     }
-    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return ref.watch(getEweetsProvider).when(
           data: (preEweets) {
+            _eweets = [];
             _eweets.addAll(preEweets);
             return ref.watch(getLatestEweetProvider).when(
                   data: (realtimeEweets) {

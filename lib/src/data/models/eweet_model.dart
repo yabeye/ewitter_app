@@ -96,7 +96,7 @@ class Eweet {
       likes: List<String>.from(map['likes']),
       commentIds: List<String>.from(map['commentIds']),
       id: map['\$id'] ?? '',
-      shareCount: 0,
+      shareCount: map['shareCount'] ?? 0,
       rePostedBy: map['rePostedBy'] ?? '',
       repliedTo: map['repliedTo'] ?? '',
     );

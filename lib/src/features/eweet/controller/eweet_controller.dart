@@ -83,7 +83,10 @@ class EweetController extends StateNotifier<bool> {
 
     eweet = eweet.copyWith(likes: likes);
     final res = await _eweetAPI.likeEweet(eweet);
-    res.fold((l) => toast(l.message), (r) {
+    res.fold((l) {
+      toast("Couldn't like at the moment!");
+      likes.remove(user.uid);
+    }, (r) {
       // toast("Ok!");
     });
   }
@@ -109,6 +112,8 @@ class EweetController extends StateNotifier<bool> {
       commentIds: [],
       shareCount: eweet.shareCount + 1,
     );
+
+    log("Updated eweet is ${eweet.shareCount}");
 
     final res = await _eweetAPI.updateShareCount(eweet);
     res.fold(

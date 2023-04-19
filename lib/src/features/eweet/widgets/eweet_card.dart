@@ -39,7 +39,7 @@ class EweetCard extends ConsumerWidget {
     } catch (_) {}
 
     return currentUser == null
-        ? Loader()
+        ? Container()
         : ref.watch(userDetailsProvider(eweet.uid)).when(
               data: (user) {
                 return InkWell(

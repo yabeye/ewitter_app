@@ -197,6 +197,7 @@ class _ReplayEweetViewState extends ConsumerState<ReplayEweetView> {
                         setState(() {});
                       },
                       label: 'Reply',
+                      textColor: KPalette.whiteColor,
                       backgroundColor: KPalette.primaryColor,
                     ),
             ),

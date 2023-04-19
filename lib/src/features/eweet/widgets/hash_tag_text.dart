@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../../theme/theme.dart';
+import '../../../common/theme/theme.dart';
 
 class HashtagText extends StatelessWidget {
   final String text;

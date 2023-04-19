@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../common/components/components.dart';
-import '../../../constants/constants.dart';
-import '../../../constants/ui_constants.dart';
-import '../../../theme/theme.dart';
+import '../../../common/constants/constants.dart';
+import '../../../common/constants/ui_constants.dart';
+import '../../../common/theme/theme.dart';
 import '../controllers/auth_controller.dart';
 import 'signup_view.dart';
 

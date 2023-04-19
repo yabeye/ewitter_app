@@ -5,11 +5,11 @@ import 'package:appwrite/models.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../constants/constants.dart';
+import '../common/constants/constants.dart';
 import '../core/core.dart';
 
 final authAPIProvider = Provider((ref) {
-  return AuthAPI(account: ref.watch(appWriteAccountProvider));
+  return AuthAPI(account: ref.watch(appwriteAccountProvider));
 });
 
 abstract class IAuthAPI {

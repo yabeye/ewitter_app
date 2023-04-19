@@ -6,10 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:optimized_cached_image/optimized_cached_image.dart';
-import 'package:ewitter_app/src/constants/constants.dart';
+import 'package:ewitter_app/src/common/constants/constants.dart';
 import 'package:ewitter_app/src/data/models/user_model.dart';
-import 'package:ewitter_app/src/theme/theme.dart';
-import 'package:ewitter_app/src/common/utils/utils.dart';
+import 'package:ewitter_app/src/common/theme/theme.dart';
+import 'package:ewitter_app/src/utils/utils.dart';
 
 import '../../../common/components/rounded_small_button.dart';
 import '../../auth/controllers/auth_controller.dart';

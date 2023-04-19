@@ -6,9 +6,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:ewitter_app/src/features/auth/controllers/auth_controller.dart';
 
 import '../../../common/components/components.dart';
-import '../../../constants/constants.dart';
-import '../../../theme/theme.dart';
-import '../../../common/utils/utils.dart';
+import '../../../common/constants/constants.dart';
+import '../../../common/theme/theme.dart';
+import '../../../utils/utils.dart';
 
 class SignUpView extends ConsumerStatefulWidget {
   const SignUpView({super.key});

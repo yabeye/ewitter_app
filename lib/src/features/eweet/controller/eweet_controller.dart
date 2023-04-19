@@ -8,7 +8,7 @@ import 'package:ewitter_app/src/apis/eweet_api.dart';
 import 'package:ewitter_app/src/apis/storage_api.dart';
 import 'package:ewitter_app/src/core/enums/eweet_type_enum.dart';
 
-import '../../../common/utils/utils.dart';
+import '../../../utils/utils.dart';
 import '../../../data/models/eweet_model.dart';
 import '../../../data/models/user_model.dart';
 import '../../auth/controllers/auth_controller.dart';

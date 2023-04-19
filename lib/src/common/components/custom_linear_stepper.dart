@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../theme/theme.dart';
+import '../theme/theme.dart';
 
 class CustomLinearStepper extends StatelessWidget {
   const CustomLinearStepper({

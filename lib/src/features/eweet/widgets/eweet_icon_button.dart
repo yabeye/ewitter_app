@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:ewitter_app/src/theme/theme.dart';
+import 'package:ewitter_app/src/common/theme/theme.dart';
 
 class EweetIconButton extends StatelessWidget {
   final String pathName;

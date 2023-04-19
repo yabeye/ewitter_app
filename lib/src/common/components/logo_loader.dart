@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../constants/constants.dart';
-import '../../theme/theme.dart';
+import '../constants/constants.dart';
+import '../theme/theme.dart';
 
 class LogoLoader extends StatelessWidget {
   const LogoLoader({

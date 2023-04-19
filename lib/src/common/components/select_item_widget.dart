@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:ewitter_app/src/theme/theme.dart';
+import 'package:ewitter_app/src/common/theme/theme.dart';
 
 // ignore: must_be_immutable
 class SelectedItemWidget extends StatelessWidget {

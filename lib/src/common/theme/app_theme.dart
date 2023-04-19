@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ewitter_app/src/theme/pallet.dart';
+import 'package:ewitter_app/src/common/theme/pallet.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 

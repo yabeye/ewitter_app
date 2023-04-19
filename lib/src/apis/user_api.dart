@@ -7,10 +7,10 @@ import 'package:fpdart/fpdart.dart';
 import 'package:ewitter_app/src/core/core.dart';
 import 'package:ewitter_app/src/data/models/user_model.dart';
 
-import '../constants/constants.dart';
+import '../common/constants/constants.dart';
 
 final userAPIProvider = Provider((ref) {
-  return UserAPI(db: ref.watch(appWriteDatabaseProvider));
+  return UserAPI(db: ref.watch(appwriteDatabaseProvider));
 });
 
 abstract class IUserAPI {
@@ -27,8 +27,8 @@ class UserAPI implements IUserAPI {
     try {
       await _db
           .createDocument(
-            databaseId: KAppWrite.databaseId,
-            collectionId: KAppWrite.usersCollectionId,
+            databaseId: KAppwrite.databaseId,
+            collectionId: KAppwrite.usersCollectionId,
             documentId: userModel.uid,
             data: userModel.toMap(),
           )
@@ -47,8 +47,8 @@ class UserAPI implements IUserAPI {
   @override
   Future<Document> getUserData(String uid) {
     return _db.getDocument(
-      databaseId: KAppWrite.databaseId,
-      collectionId: KAppWrite.usersCollectionId,
+      databaseId: KAppwrite.databaseId,
+      collectionId: KAppwrite.usersCollectionId,
       documentId: uid,
     );
   }

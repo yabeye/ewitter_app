@@ -8,8 +8,8 @@ import 'package:appwrite/models.dart';
 import 'package:ewitter_app/src/features/home/view/home_view.dart';
 import 'package:ewitter_app/src/features/auth/view/login_view.dart';
 
-import '../../constants/constants.dart';
-import '../../theme/theme.dart';
+import '../../common/constants/constants.dart';
+import '../../common/theme/theme.dart';
 import '../auth/controllers/auth_controller.dart';
 
 class SplashView extends ConsumerStatefulWidget {

@@ -6,12 +6,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ewitter_app/src/features/splash/splash_view.dart';
 
-import 'src/constants/constants.dart';
-import 'src/theme/theme.dart';
+import 'src/common/constants/constants.dart';
+import 'src/common/theme/theme.dart';
 
 Future<void> main() async {
   await dotenv.load();
-  if (!KAppWrite.checkEnvVariables()) {
+  if (!KAppwrite.checkEnvVariables()) {
     if (kDebugMode) {
       print("Please provide all the environment variables!");
     }

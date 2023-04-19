@@ -8,11 +8,11 @@ import 'package:optimized_cached_image/optimized_cached_image.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../common/components/error_page.dart';
-import '../../../constants/constants.dart';
+import '../../../common/constants/constants.dart';
 import '../../../core/enums/eweet_type_enum.dart';
 import '../../../data/models/eweet_model.dart';
 import '../../../data/models/user_model.dart';
-import '../../../theme/theme.dart';
+import '../../../common/theme/theme.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../controller/eweet_controller.dart';
 import 'carousel_image.dart';

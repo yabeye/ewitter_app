@@ -1,4 +1,4 @@
-import 'package:ewitter_app/src/theme/pallet.dart';
+import 'package:ewitter_app/src/common/theme/pallet.dart';
 import 'package:flutter/material.dart';
 
 class RoundedSmallButton extends StatelessWidget {

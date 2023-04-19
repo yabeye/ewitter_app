@@ -113,8 +113,6 @@ class EweetController extends StateNotifier<bool> {
       shareCount: eweet.shareCount + 1,
     );
 
-    log("Updated eweet is ${eweet.shareCount}");
-
     final res = await _eweetAPI.updateShareCount(eweet);
     res.fold(
       (l) => toast(l.message),
@@ -152,11 +150,15 @@ class EweetController extends StateNotifier<bool> {
         context,
         images: images,
         text: text,
+        repliedTo: repliedTo,
+        repliedToUserId: repliedToUserId,
       );
     } else {
       _postTextEweet(
         context,
         text: text,
+        repliedTo: repliedTo,
+        repliedToUserId: repliedToUserId,
       );
     }
   }
@@ -165,6 +167,8 @@ class EweetController extends StateNotifier<bool> {
     BuildContext context, {
     required List<File> images,
     required String text,
+    required String repliedTo,
+    required String repliedToUserId,
   }) async {
     state = true;
     final hashtags = getHashTagsFromText(text);
@@ -184,8 +188,8 @@ class EweetController extends StateNotifier<bool> {
       commentIds: const [],
       id: '',
       shareCount: 0,
-      rePostedBy: '',
-      repliedTo: '',
+      repliedTo: repliedTo,
+      rePostedBy: repliedToUserId,
     );
     final res = await _eweetAPI.postEweet(newEweet);
 
@@ -197,7 +201,7 @@ class EweetController extends StateNotifier<bool> {
     });
 
     state = false;
-    if (mounted) {
+    if (mounted && repliedTo.isEmpty) {
       Navigator.pop(context);
     }
   }
@@ -205,6 +209,8 @@ class EweetController extends StateNotifier<bool> {
   void _postTextEweet(
     BuildContext context, {
     required String text,
+    required String repliedTo,
+    required String repliedToUserId,
   }) async {
     state = true;
     final hashtags = getHashTagsFromText(text);
@@ -222,8 +228,8 @@ class EweetController extends StateNotifier<bool> {
       commentIds: const [],
       id: '',
       shareCount: 0,
-      rePostedBy: '',
-      repliedTo: '',
+      repliedTo: repliedTo,
+      rePostedBy: repliedToUserId,
     );
     final res = await _eweetAPI.postEweet(newEweet);
     res.fold((l) {
@@ -233,7 +239,7 @@ class EweetController extends StateNotifier<bool> {
       toast("Shared an Eweet!");
     });
     state = false;
-    if (mounted) {
+    if (mounted && repliedTo.isEmpty) {
       Navigator.pop(context);
     }
   }

@@ -18,4 +18,14 @@ extension strEtx on String {
       },
     );
   }
+
+  String capitalize() {
+    //TODO: Temporary fix: Update for strings like "Hello, world=> Hello World"!
+    String capitalized = "";
+    // return capitalized;
+
+    return length > 0
+        ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}'
+        : '';
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:ewitter_app/src/common/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:any_link_preview/any_link_preview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,31 +16,36 @@ import '../../../data/models/user_model.dart';
 import '../../../common/theme/theme.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../controller/eweet_controller.dart';
+import '../view/reply_eweet_view.dart';
 import 'carousel_image.dart';
 import 'eweet_icon_button.dart';
 import 'hash_tag_text.dart';
 
 class EweetCard extends ConsumerWidget {
   final Eweet eweet;
+  final bool isComment;
   const EweetCard({
     super.key,
     required this.eweet,
+    this.isComment = false,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     UserModel? currentUser;
     try {
-      debugPrint("Current tweet count is ${eweet.shareCount}");
+      // TODO: Remove this try catch block latter!
       currentUser = ref.watch(currentUserDetailsProvider).value;
     } catch (_) {}
 
     return currentUser == null
-        ? const SizedBox()
+        ? Loader()
         : ref.watch(userDetailsProvider(eweet.uid)).when(
               data: (user) {
-                return GestureDetector(
-                  onTap: () {},
+                return InkWell(
+                  onTap: () {
+                    ReplayEweetView(eweet: eweet).launch(context);
+                  },
                   child: Column(
                     children: [
                       Row(
@@ -47,9 +53,11 @@ class EweetCard extends ConsumerWidget {
                         children: [
                           Container(
                             margin: const EdgeInsets.all(10),
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: currentUser!.profilePic == null
+                            child: InkWell(
+                              onTap: () {
+                                debugPrint("Go to Profile!");
+                              },
+                              child: user.profilePic == null
                                   ? SvgPicture.asset(
                                       KAssets.noUserIcon,
                                       color: Colors.white,
@@ -96,7 +104,7 @@ class EweetCard extends ConsumerWidget {
                                       ),
                                       const SizedBox(width: 2),
                                       Text(
-                                        '${eweet.rePostedBy} re eweeted',
+                                        '${eweet.rePostedBy} Reeweeted',
                                         style: const TextStyle(
                                           color: KPalette.greyColor,
                                           fontSize: 16,
@@ -113,7 +121,7 @@ class EweetCard extends ConsumerWidget {
                                             (user.isVerified ?? false) ? 1 : 5,
                                       ),
                                       child: Text(
-                                        user.username,
+                                        user.username.capitalize(),
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 19,
@@ -195,98 +203,32 @@ class EweetCard extends ConsumerWidget {
                                     top: 10,
                                     right: 20,
                                   ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      EweetIconButton(
-                                        pathName: KAssets.viewsIcon,
-                                        text: (eweet.commentIds.length +
-                                                eweet.shareCount +
-                                                eweet.likes.length)
-                                            .toString(),
-                                        onTap: () {},
-                                      ),
-                                      EweetIconButton(
-                                        pathName: KAssets.commentIcon,
-                                        text:
-                                            eweet.commentIds.length.toString(),
-                                        onTap: () {},
-                                      ),
-                                      EweetIconButton(
-                                        pathName: KAssets.reEweetIcon,
-                                        text: eweet.shareCount.toString(),
-                                        onTap: () {
-                                          ref
-                                              .read(eweetControllerProvider
-                                                  .notifier)
-                                              .shareEweet(
-                                                context,
-                                                eweet: eweet,
-                                                currentUser: currentUser!,
-                                              );
-                                        },
-                                      ),
-                                      LikeButton(
-                                        size: 25,
-                                        onTap: (isLiked) async {
-                                          ref
-                                              .read(eweetControllerProvider
-                                                  .notifier)
-                                              .likeEweet(
-                                                eweet,
-                                                currentUser!,
-                                              );
-                                          return !isLiked;
-                                        },
-                                        isLiked: eweet.likes
-                                            .contains(currentUser.uid),
-                                        likeBuilder: (isLiked) {
-                                          return isLiked
-                                              ? SvgPicture.asset(
-                                                  KAssets.likeFilledIcon,
-                                                  color: KPalette.redColor,
-                                                )
-                                              : SvgPicture.asset(
-                                                  KAssets.likeOutlinedIcon,
-                                                  color: KPalette.greyColor,
-                                                );
-                                        },
-                                        likeCount: eweet.likes.length,
-                                        countBuilder:
-                                            (likeCount, isLiked, text) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 2.0),
-                                            child: Text(
-                                              text,
-                                              style: TextStyle(
-                                                color: isLiked
-                                                    ? KPalette.redColor
-                                                    : KPalette.whiteColor,
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(
-                                          Icons.share_outlined,
-                                          size: 25,
-                                          color: KPalette.greyColor,
-                                        ),
-                                      ),
-                                    ],
+                                  child: EweetDash(
+                                    eweet: eweet,
+                                    currentUser: currentUser,
+                                    isComment: isComment,
                                   ),
-                                ),
+                                ).visible(!isComment),
                                 const SizedBox(height: 1),
                               ],
                             ),
                           ),
                         ],
                       ),
+                      (isComment ? 10 : 0).height,
+                      const Divider(color: KPalette.greyColor)
+                          .visible(isComment),
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                          // horizontal: 20,
+                          vertical: 5,
+                        ),
+                        child: EweetDash(
+                          eweet: eweet,
+                          currentUser: currentUser,
+                          isComment: isComment,
+                        ),
+                      ).visible(isComment),
                       const Divider(color: KPalette.greyColor),
                     ],
                   ),
@@ -297,5 +239,103 @@ class EweetCard extends ConsumerWidget {
               ),
               loading: () => Loader(),
             );
+  }
+}
+
+class EweetDash extends ConsumerWidget {
+  const EweetDash({
+    super.key,
+    required this.eweet,
+    required this.currentUser,
+    this.isComment = false,
+  });
+
+  final Eweet eweet;
+  final UserModel? currentUser;
+  final bool isComment;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        EweetIconButton(
+          pathName: KAssets.viewsIcon,
+          text:
+              (eweet.commentIds.length + eweet.shareCount + eweet.likes.length)
+                  .toString(),
+          onTap: () {},
+        ).visible(!isComment),
+        EweetIconButton(
+          pathName: KAssets.commentIcon,
+          text: eweet.commentIds.length.toString(),
+          onTap: () {},
+        ),
+        EweetIconButton(
+          pathName: KAssets.reEweetIcon,
+          text: eweet.shareCount.toString(),
+          onTap: () {
+            ref.read(eweetControllerProvider.notifier).shareEweet(
+                  context,
+                  eweet: eweet,
+                  currentUser: currentUser!,
+                );
+          },
+        ),
+        LikeButton(
+          size: 25,
+          onTap: (isLiked) async {
+            ref.read(eweetControllerProvider.notifier).likeEweet(
+                  eweet,
+                  currentUser!,
+                );
+            return !isLiked;
+          },
+          isLiked: eweet.likes.contains(currentUser!.uid),
+          likeBuilder: (isLiked) {
+            return isLiked
+                ? SvgPicture.asset(
+                    KAssets.likeFilledIcon,
+                    color: KPalette.redColor,
+                  )
+                : SvgPicture.asset(
+                    KAssets.likeOutlinedIcon,
+                    color: KPalette.greyColor,
+                  );
+          },
+          likeCount: eweet.likes.length,
+          countBuilder: (likeCount, isLiked, text) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 2.0),
+              child: Text(
+                text,
+                style: TextStyle(
+                  color: isLiked ? KPalette.redColor : KPalette.whiteColor,
+                  fontSize: 16,
+                ),
+              ),
+            );
+          },
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            EweetIconButton(
+              pathName: KAssets.bookmarkIcon,
+              text: eweet.commentIds.length.toString(),
+              onTap: () {},
+            ).visible(isComment),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.share_outlined,
+                size: 25,
+                color: KPalette.greyColor,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }

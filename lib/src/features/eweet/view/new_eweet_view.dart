@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -15,17 +15,17 @@ import '../../../common/components/rounded_small_button.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../controller/eweet_controller.dart';
 
-class NewEweet extends ConsumerStatefulWidget {
+class NewEweetView extends ConsumerStatefulWidget {
   static route() => MaterialPageRoute(
-        builder: (context) => const NewEweet(),
+        builder: (context) => const NewEweetView(),
       );
-  const NewEweet({super.key});
+  const NewEweetView({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _NewEweetState();
 }
 
-class _NewEweetState extends ConsumerState<NewEweet> {
+class _NewEweetState extends ConsumerState<NewEweetView> {
   late final TextEditingController _eweetTextController;
   List<File> _images = [];
 

@@ -1,8 +1,8 @@
-import 'package:ewitter_app/src/common/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ewitter_app/src/common/components/back_widget.dart';
+import 'package:ewitter_app/src/common/extensions/string_extensions.dart';
 
 import 'package:ewitter_app/src/common/theme/theme.dart';
 import 'asset_constants.dart';
@@ -14,6 +14,7 @@ AppBar appBar({
   withNotification = true,
   Widget? backWidget,
   bool showBack = false,
+  bool isCenterTitle = true,
 }) {
   return appBarWidget(
     "",
@@ -37,7 +38,7 @@ AppBar appBar({
             )),
     color: KPalette.backgroundColor,
     showBack: showBack,
-    center: true,
+    center: isCenterTitle,
     backWidget: backWidget ?? const BackWidget(),
   );
 }

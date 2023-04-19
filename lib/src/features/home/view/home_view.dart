@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../common/constants/constants.dart';
-import '../../eweet/view/eweet_list.dart';
-import '../../eweet/view/new_eweet.dart';
+import '../../eweet/view/eweet_list_view.dart';
+import '../../eweet/view/new_eweet_view.dart';
 import '../widgets/app_bottom_nav_bar.dart';
 import '../widgets/app_floating_button.dart';
 
@@ -37,7 +37,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   _onCreatePost() {
-    const NewEweet().launch(context);
+    const NewEweetView().launch(context);
   }
 
   @override
@@ -59,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
   Widget _getBody() {
     switch (_page) {
       case 0:
-        return const EweetList();
+        return const EweetListView();
       case 1:
         return Center(
             child: Text(

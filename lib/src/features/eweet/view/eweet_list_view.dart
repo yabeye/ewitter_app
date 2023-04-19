@@ -9,14 +9,14 @@ import '../../../data/models/eweet_model.dart';
 import '../controller/eweet_controller.dart';
 import '../widgets/eweet_card.dart';
 
-class EweetList extends ConsumerStatefulWidget {
-  const EweetList({super.key});
+class EweetListView extends ConsumerStatefulWidget {
+  const EweetListView({super.key});
 
   @override
-  ConsumerState<EweetList> createState() => _EweetListState();
+  ConsumerState<EweetListView> createState() => _EweetListState();
 }
 
-class _EweetListState extends ConsumerState<EweetList> {
+class _EweetListState extends ConsumerState<EweetListView> {
   List<Eweet> _eweets = [];
 
   void _realtimeEweetUpdate(RealtimeMessage realtimeEweets) {

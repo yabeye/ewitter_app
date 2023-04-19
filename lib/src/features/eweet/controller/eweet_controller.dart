@@ -83,8 +83,8 @@ class EweetController extends StateNotifier<bool> {
 
     eweet = eweet.copyWith(likes: likes);
     final res = await _eweetAPI.likeEweet(eweet);
-    res.fold((l) => null, (r) {
-      toast("Ok!");
+    res.fold((l) => toast(l.message), (r) {
+      // toast("Ok!");
     });
   }
 

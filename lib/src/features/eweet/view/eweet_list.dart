@@ -19,24 +19,20 @@ class EweetList extends ConsumerStatefulWidget {
 class _EweetListState extends ConsumerState<EweetList> {
   final List<Eweet> _eweets = [];
 
-  void _realtimeEweetUpdate(RealtimeMessage realtimeEweet) {
-    if (realtimeEweet.events.contains(
-      'databases.*.collections.${KAppwrite.eweetsCollection}.documents.*.create',
-    )) {
-      _eweets.insert(0, Eweet.fromMap(realtimeEweet.payload));
-    } else if (realtimeEweet.events.contains(
-      'databases.*.collections.${KAppwrite.eweetsCollection}.documents.*.update',
-    )) {
-      final start = realtimeEweet.events[0].lastIndexOf('documents.');
-      final end = realtimeEweet.events[0].lastIndexOf('.update');
-      final eweetId = realtimeEweet.events[0].substring(start + 10, end);
+  void _realtimeEweetUpdate(RealtimeMessage realtimeEweets) {
+    final String eventFrom =
+        'databases.*.collections.${KAppwrite.eweetsCollection}.documents.*';
+    if (realtimeEweets.events.contains('$eventFrom.create')) {
+      _eweets.insert(0, Eweet.fromMap(realtimeEweets.payload));
+    } else if (realtimeEweets.events.contains('$eventFrom.update')) {
+      final start = realtimeEweets.events[0].lastIndexOf('documents.');
+      final end = realtimeEweets.events[0].lastIndexOf('.update');
+      final eweetId = realtimeEweets.events[0].substring(start + 10, end);
 
-      _eweets.removeWhere((element) => element.id == eweetId);
-      var newEweet = _eweets.where((element) => element.id == eweetId).first;
-      newEweet = Eweet.fromMap(realtimeEweet.payload);
-
-      _eweets.insert(_eweets.indexOf(newEweet), newEweet);
+      int updatedEweetIndex = _eweets.indexWhere((e) => e.id == eweetId);
+      _eweets[updatedEweetIndex] = Eweet.fromMap(realtimeEweets.payload);
     }
+    setState(() {});
   }
 
   @override
@@ -47,6 +43,7 @@ class _EweetListState extends ConsumerState<EweetList> {
             return ref.watch(getLatestEweetProvider).when(
                   data: (realtimeEweets) {
                     _realtimeEweetUpdate(realtimeEweets);
+
                     return ListView.builder(
                       itemCount: _eweets.length,
                       itemBuilder: (c, i) => EweetCard(eweet: _eweets[i]),

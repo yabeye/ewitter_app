@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class CarouselImage extends StatefulWidget {
   final List<String> imageLinks;
@@ -27,7 +28,7 @@ class _CarouselImageState extends State<CarouselImage> {
                 (link) {
                   return Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: radius(),
                     ),
                     margin: const EdgeInsets.all(10),
                     child: Image.network(

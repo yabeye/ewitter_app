@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:ewitter_app/src/theme/pallet.dart';
 
 import '../../../constants/constants.dart';
-import '../../eweet/eweet_list.dart';
+import '../../eweet/view/eweet_list.dart';
 import '../../eweet/view/new_eweet.dart';
 
 class HomeView extends StatefulWidget {

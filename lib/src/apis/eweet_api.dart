@@ -148,9 +148,9 @@ class EweetAPI implements IEweetAPI {
     final documents = await _db.listDocuments(
       databaseId: KAppWrite.databaseId,
       collectionId: KAppWrite.eweetsCollection,
-      queries: [
-        Query.equal('uid', uid),
-      ],
+      // queries: [
+      //   Query.equal('uid', uid),
+      // ],
     );
     return documents.documents;
   }
@@ -160,9 +160,9 @@ class EweetAPI implements IEweetAPI {
     final documents = await _db.listDocuments(
       databaseId: KAppWrite.databaseId,
       collectionId: KAppWrite.eweetsCollection,
-      queries: [
-        Query.search('hashTags', hashTag),
-      ],
+      // queries: [
+      //   Query.search('hashTags', hashTag),
+      // ],
     );
     return documents.documents;
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../theme/theme.dart';
+import '../theme/theme.dart';
 
 class CustomLinearStepper extends StatelessWidget {
   const CustomLinearStepper({
@@ -26,7 +26,7 @@ class CustomLinearStepper extends StatelessWidget {
               Text(
                 stepperList[stepperIndex],
                 style: boldTextStyle(
-                  color: KPallet.whiteColor,
+                  color: KPalette.whiteColor,
                 ),
               ),
               Chip(
@@ -34,7 +34,7 @@ class CustomLinearStepper extends StatelessWidget {
                   "${(stepperIndex + 1).bitLength == 1 ? "0" : ""}${stepperIndex + 1} / ${stepperList.length.bitLength == 1 ? "0" : ""}${stepperList.length}",
                   style: boldTextStyle(size: body2Size),
                 ),
-                backgroundColor: KPallet.primaryColorLight,
+                backgroundColor: KPalette.primaryColorLight,
               ),
             ],
           ),
@@ -45,7 +45,7 @@ class CustomLinearStepper extends StatelessWidget {
                 height: 10,
                 width: context.width(),
                 decoration: BoxDecoration(
-                  color: KPallet.greyColor.withOpacity(.5),
+                  color: KPalette.greyColor.withOpacity(.5),
                   borderRadius: radius(),
                 ),
                 child: Container(),
@@ -55,7 +55,7 @@ class CustomLinearStepper extends StatelessWidget {
                 width:
                     context.width() * ((stepperIndex + 1) / stepperList.length),
                 decoration: BoxDecoration(
-                  color: KPallet.primaryColor,
+                  color: KPalette.primaryColor,
                   borderRadius: radius(),
                 ),
                 child: Container(),

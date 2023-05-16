@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../constants/constants.dart';
-import '../../theme/theme.dart';
+import '../constants/constants.dart';
+import '../theme/theme.dart';
 
 class LogoLoader extends StatelessWidget {
   const LogoLoader({
@@ -19,7 +19,7 @@ class LogoLoader extends StatelessWidget {
       height: 40,
       width: 40,
       decoration: BoxDecoration(
-        color: KPallet.primaryColor,
+        color: KPalette.primaryColor,
         borderRadius: radius(100),
       ),
       child: Stack(
@@ -30,7 +30,7 @@ class LogoLoader extends StatelessWidget {
             child: !isLoading
                 ? null
                 : const CircularProgressIndicator(
-                    color: KPallet.primaryColor,
+                    color: KPalette.primaryColor,
                     strokeWidth: 8,
                   ),
           )

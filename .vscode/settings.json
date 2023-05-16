@@ -1,4 +1,17 @@
 {
-  "cSpell.words": ["appwrite", "dotenv", "Ewitter", "signup"],
+  "cSpell.words": [
+    "appwrite",
+    "dotenv",
+    "Eweet",
+    "eweeted",
+    "Eweets",
+    "Ewitter",
+    "reeweet",
+    "Reeweeted",
+    "Reweeted",
+    "riverpod",
+    "signup",
+    "timeago"
+  ],
   "dotenv.enableAutocloaking": false
 }

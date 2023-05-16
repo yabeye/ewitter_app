@@ -6,8 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:ewitter_app/src/features/auth/controllers/auth_controller.dart';
 
 import '../../../common/components/components.dart';
-import '../../../constants/constants.dart';
-import '../../../theme/theme.dart';
+import '../../../common/constants/constants.dart';
+import '../../../common/theme/theme.dart';
 import '../../../utils/utils.dart';
 
 class SignUpView extends ConsumerStatefulWidget {
@@ -71,9 +71,10 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
     }
 
     ref.read(authControllerProvider.notifier).signUp(
+          context,
           email: _emailController.text,
           password: _passwordController.text,
-          name: _usernameController.text,
+          username: _usernameController.text,
         );
   }
 
@@ -105,7 +106,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                       "${isLoading ? "Creating" : "Create"} a new account",
                       style: boldTextStyle(
                         size: heading2Size,
-                        color: KPallet.whiteColor,
+                        color: KPalette.whiteColor,
                       ),
                     ),
                   ),
@@ -206,7 +207,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
             TextSpan(text: 'Agree on ', style: secondaryTextStyle()),
             TextSpan(
               text: "Terms of Service",
-              style: boldTextStyle(color: KPallet.primaryColor, size: 14),
+              style: boldTextStyle(color: KPalette.primaryColor, size: 14),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   commonLaunchUrl(
@@ -218,7 +219,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
             TextSpan(text: ' & ', style: secondaryTextStyle()),
             TextSpan(
               text: "Privacy Policy",
-              style: boldTextStyle(color: KPallet.primaryColor, size: 14),
+              style: boldTextStyle(color: KPalette.primaryColor, size: 14),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   commonLaunchUrl(
@@ -239,9 +240,9 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
       children: [
         AppButton(
           text: "Sign Up",
-          color: KPallet.primaryColor,
+          color: KPalette.primaryColor,
           textStyle: boldTextStyle(color: white),
-          width: context.width() - context.navigationBarHeight,
+          width: context.width(),
           onTap: isLoading ? null : _onSignUp,
         ),
         20.height,
@@ -257,7 +258,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
               child: Text(
                 "Log In",
                 style: boldTextStyle(
-                  color: KPallet.primaryColor,
+                  color: KPalette.primaryColor,
                   decoration: TextDecoration.underline,
                   fontStyle: FontStyle.italic,
                 ),

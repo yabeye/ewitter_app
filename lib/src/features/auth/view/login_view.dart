@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../common/components/components.dart';
-import '../../../constants/constants.dart';
-import '../../../constants/ui_constants.dart';
-import '../../../theme/theme.dart';
+import '../../../common/constants/constants.dart';
+import '../../../common/constants/ui_constants.dart';
+import '../../../common/theme/theme.dart';
 import '../controllers/auth_controller.dart';
 import 'signup_view.dart';
 
@@ -54,6 +54,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
     }
 
     ref.read(authControllerProvider.notifier).logIn(
+          context,
           email: _emailController.text,
           password: _passwordController.text,
         );
@@ -79,7 +80,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                   "Log In",
                   style: boldTextStyle(
                     size: heading2Size,
-                    color: KPallet.whiteColor,
+                    color: KPalette.whiteColor,
                   ),
                 ),
               ),
@@ -139,7 +140,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
         24.height,
         AppButton(
           text: "Log In",
-          color: KPallet.primaryColor,
+          color: KPalette.primaryColor,
           textStyle: boldTextStyle(color: white),
           width: context.width() - context.navigationBarHeight,
           onTap: isLoading ? null : _onLogIn,
@@ -150,7 +151,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
           child: Text(
             "Forgot Password?",
             style: boldTextStyle(
-              color: KPallet.primaryColor,
+              color: KPalette.primaryColor,
               fontStyle: FontStyle.italic,
             ),
           ),
@@ -167,7 +168,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
               child: Text(
                 "SignUp",
                 style: boldTextStyle(
-                  color: KPallet.primaryColor,
+                  color: KPalette.primaryColor,
                   decoration: TextDecoration.underline,
                   fontStyle: FontStyle.italic,
                 ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class KPallet {
+class KPalette {
   // App Colors
   static const Color primaryColor = Color(0XFFD58F77);
   static const Color primaryColorLight = Color(0XFFEDC0AD);

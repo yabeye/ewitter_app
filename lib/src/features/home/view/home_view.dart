@@ -44,7 +44,11 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      body: _getBody(),
+      body: RefreshIndicator(
+          onRefresh: () async {
+            await 2.seconds.delay;
+          },
+          child: _getBody()),
       bottomNavigationBar: AppBottomNavBar(
         page: _page,
         onPageChange: (x) => _onPageChange(x),
